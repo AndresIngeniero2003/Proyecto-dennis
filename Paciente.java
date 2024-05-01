@@ -13,13 +13,15 @@ public class Paciente {
     private String rh;
 
     private Date lastDate;
+    private Date nextDate;
 
-    public Paciente(int id, String name, int age, String rh, Date lastDate) {
+    public Paciente(int id, String name, int age, String rh, Date lastDate, Date nextDate) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.rh = rh;
         this.lastDate = lastDate;
+        this.nextDate = nextDate;
     }
 
     public int getId() {
@@ -60,5 +62,23 @@ public class Paciente {
 
     public void setLastDate(Date lastDate) {
         this.lastDate = lastDate;
+    }
+
+    public Date getNextDate() {
+        return nextDate;
+    }
+
+    public void setNextDate(Date nextDate) {
+        this.nextDate = nextDate;
+    }
+
+    public int calculateNextDate(Paciente paciente){
+        Date nextDate = (0,0,0);
+        if(paciente.getAge() >= 25 && paciente.getAge() <= 35){
+            nextDate = 0,0,0;
+        }
+
+
+        return nextDate;
     }
 }
