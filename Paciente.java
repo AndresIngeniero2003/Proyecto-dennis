@@ -1,4 +1,4 @@
-import java.sql.Date;
+import java.time.LocalDate;
 /**
  * Paciente
  */
@@ -12,10 +12,10 @@ public class Paciente {
     
     private String rh;
 
-    private Date lastDate;
-    private Date nextDate;
+    private LocalDate lastDate;
+    private LocalDate nextDate;
 
-    public Paciente(int id, String name, int age, String rh, Date lastDate, Date nextDate) {
+    public Paciente(int id, String name, int age, String rh, LocalDate lastDate, LocalDate nextDate) {
         this.id = id;
         this.name = name;
         this.age = age;
@@ -56,28 +56,31 @@ public class Paciente {
         this.rh = rh;
     }
 
-    public Date getLastDate() {
+    public LocalDate getLastDate() {
         return lastDate;
     }
 
-    public void setLastDate(Date lastDate) {
+    public void setLastDate(LocalDate lastDate) {
         this.lastDate = lastDate;
     }
 
-    public Date getNextDate() {
+    public LocalDate getNextDate() {
         return nextDate;
     }
 
-    public void setNextDate(Date nextDate) {
+    public void setNextDate(LocalDate nextDate) {
         this.nextDate = nextDate;
     }
 
-    public int calculateNextDate(Paciente paciente){
-        Date nextDate = (0,0,0);
+    public LocalDate calculateNextDate(Paciente paciente){
+        LocalDate nextDate;
         if(paciente.getAge() >= 25 && paciente.getAge() <= 35){
-            nextDate = 0,0,0;
+            nextDate = getLastDate().plusMonths(2).plusDays(15);
+        } else if (paciente.getAge() > 35 && paciente.getAge() <= 45) {
+            nextDate = getLastDate().plusMonths(1).plusDays(15);
+        }else{
+            nextDate = getLastDate().plusDays(15);
         }
-
 
         return nextDate;
     }
