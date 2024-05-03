@@ -1,4 +1,7 @@
 import java.time.LocalDate;
+import java.util.LinkedList;
+import java.util.Random;
+
 /**
  * Paciente
  */
@@ -15,13 +18,12 @@ public class Paciente {
     private LocalDate lastDate;
     private LocalDate nextDate;
 
-    public Paciente(int id, String name, int age, String rh, LocalDate lastDate, LocalDate nextDate) {
+    public Paciente(int id, String name, int age, String rh, LocalDate lastDate) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.rh = rh;
         this.lastDate = lastDate;
-        this.nextDate = nextDate;
     }
 
     public int getId() {
@@ -81,7 +83,28 @@ public class Paciente {
         }else{
             nextDate = getLastDate().plusDays(15);
         }
-
+        paciente.setNextDate(nextDate);
         return nextDate;
+
+    }
+    public LinkedList<Paciente> generarPacientes(int n){
+        LinkedList<Paciente> patients = new LinkedList<>();
+        Random rd = new Random();
+        int id,age;
+        String name, rh;
+        LocalDate lastDate,nextDate;
+
+        for (int i = 0; i < n; i++) {
+            id = i+1;
+            name = "PACIENTE" + id;
+            age = rd.nextInt(50)+20;
+            rh = rd.nextBoolean() ? "Positive": "Negative";
+            lastDate = LocalDate.now().minusDays(rd.nextInt(30));
+            Paciente paciente = new Paciente(id, name, age, rh, lastDate);
+            calculateNextDate(paciente);
+            patients.set(i, paciente);
+        }
+        return patients;
+
     }
 }
